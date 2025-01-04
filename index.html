@@ -15,91 +15,37 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a1c2c 0%, #4a2b7b 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6eaf0 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: #2c3e50;
             overflow: hidden;
         }
 
         .container {
             text-align: center;
             padding: 2rem;
-            max-width: 800px;
+            max-width: 600px;
+            z-index: 1;
         }
 
         h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            color: #34495e;
+            font-weight: 300;
             opacity: 0;
             transform: translateY(30px);
         }
 
         p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            color: #7f8c8d;
+            line-height: 1.6;
             opacity: 0;
             transform: translateY(30px);
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            min-width: 100px;
-        }
-
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .email-form {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        input[type="email"] {
-            padding: 1rem 1.5rem;
-            width: 300px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            margin-right: 1rem;
-            outline: none;
-        }
-
-        button {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            background: #ff6b6b;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #ff5252;
         }
 
         .circles {
@@ -108,40 +54,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             overflow: hidden;
         }
 
         .circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(52, 152, 219, 0.1);
         }
 
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
-            }
-
-            .countdown {
-                gap: 1rem;
-            }
-
-            .countdown-item {
-                min-width: 80px;
-            }
-
-            .email-form {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            input[type="email"] {
-                margin-right: 0;
-                width: 100%;
-                max-width: 300px;
             }
         }
     </style>
@@ -151,37 +76,13 @@
     <div class="circles"></div>
     <div class="container">
         <h1>Coming Soon</h1>
-        <p>We're working hard to bring you something amazing. Stay tuned!</p>
-        <div class="countdown">
-            <div class="countdown-item">
-                <div class="countdown-number" id="days">00</div>
-                <div class="countdown-label">Days</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="hours">00</div>
-                <div class="countdown-label">Hours</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutes">00</div>
-                <div class="countdown-label">Minutes</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="seconds">00</div>
-                <div class="countdown-label">Seconds</div>
-            </div>
-        </div>
-        <div class="email-form">
-            <input type="email" placeholder="Enter your email">
-            <button>Notify Me</button>
-        </div>
+        <p>We're working on something exciting. Stay tuned!</p>
     </div>
 
     <script>
-        // Animation
+        // Animation for text
         gsap.to('h1', { opacity: 1, y: 0, duration: 1, delay: 0.2 });
         gsap.to('p', { opacity: 1, y: 0, duration: 1, delay: 0.4 });
-        gsap.to('.countdown', { opacity: 1, y: 0, duration: 1, delay: 0.6 });
-        gsap.to('.email-form', { opacity: 1, y: 0, duration: 1, delay: 0.8 });
 
         // Create floating circles
         const circles = document.querySelector('.circles');
@@ -203,38 +104,6 @@
                 ease: 'none'
             });
         }
-
-        // Countdown Timer
-        const countdownDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 days from now
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Simple form handling
-        document.querySelector('button').addEventListener('click', function () {
-            const email = document.querySelector('input[type="email"]').value;
-            if (email) {
-                alert('Thank you! We\'ll notify you when we launch.');
-                document.querySelector('input[type="email"]').value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        });
     </script>
 </body>
 
